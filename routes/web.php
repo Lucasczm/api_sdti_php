@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::post('/api', [api::class , 'calcular'] );
 
 Route::get('/home', [homeController::class , 'index'] );
