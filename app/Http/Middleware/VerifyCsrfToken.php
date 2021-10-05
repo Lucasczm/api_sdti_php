@@ -14,5 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'http://localhost:8000/api',
         'https://damp-springs-15874.herokuapp.com/api',
+        'http://damp-springs-15874.herokuapp.com/api',
+        'damp-springs-15874.herokuapp.com/api',
+        
     ];
 }
