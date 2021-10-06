@@ -134,7 +134,7 @@
         width: 203px;
         height: 199px;
 
-        background: url(images/kid2.svg);
+        background: url(images/Kid2.svg);
 
         margin-left: 320px;
         margin-top: 160px;
@@ -145,7 +145,7 @@
         width: 155px;
         height: 153px;
 
-        background: url(images/kid3.svg);
+        background: url(images/Kid3.svg);
 
         margin-left: 140px;
         margin-top: 330px;
