@@ -4,6 +4,13 @@
 Configurações API TBR
 @endsection
 
+@if (!@empty($mensagem))
+
+        <div class="alert alert-primary">
+                {{$mensagem}}
+        </div>
+@endif
+
 @section('conteudo')
 
 <h3>cadastrar novo conselho tutelar:</h3>

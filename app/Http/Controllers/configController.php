@@ -10,7 +10,10 @@ class configController extends Controller
 {
     public function index(Request $req)     
     {
-        return view('config.index');
+
+        $mensagem = $req->session()->get('mensagem');
+        return view('config.index' , 
+        ['mensagem'=> $mensagem]);
     }
 
     public function store(Request $req)
@@ -23,11 +26,17 @@ class configController extends Controller
             "endereco" => $req->enderecoCon,
         ]);
 
-        $resp->conselho()->create([
+        $resp->conselhos()->create([
             "lat" => $req->lat,
             "lon" => $req->lon,
+            "email_con" => $req->emailCon,
+            "nome_con" => $req->nomeCon,
+            "tel_con" => $req->telefoneCon,
+            "endereco_con" => $req->enderecoCon,
         ]);
         DB::commit();
-        dd($req);
+        
+        $req->session()->flash('mensagem' , "Conselho Nº $resp->id criado com sucesso!");
+        return redirect()->route('configuracoes');
     }
 }

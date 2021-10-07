@@ -11,7 +11,7 @@ class responsaveis_conselhos extends Model
     public $timestamps = false;
     protected $guarded = [];
 
-    public function conselho  ()
+    public function conselhos  ()
     {
         return $this->hasOne(conselhos::class);
     }

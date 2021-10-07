@@ -17,6 +17,10 @@ class Conselhos extends Migration
             $table->bigIncrements('id');
             $table->string('lat');
             $table->string('lon');
+            $table->string('email');
+            $table->string('nome');
+            $table->string('tel');
+            $table->text('endereco');
 
             $table->foreignId('responsaveis_conselhos_id')
             ->references('id')

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\app_config;
+use App\Models\conselhos;
 use App\Models\pontos;
+use App\Models\responsaveis_conselhos;
 use App\Services\medir_distancia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +19,8 @@ class api extends Controller
 
         $pontos = pontos::get();
         $config = app_config::get();
+        $conselhos = responsaveis_conselhos::with('conselhos')->get();
+    
         
 
         if(!$pontos->isEmpty()) //Se já existir algum ponto
@@ -39,6 +43,24 @@ class api extends Controller
                     {
                         $ponto->var =  1;
                         //Gera denuncia formal
+                        $id_conselho_escolhido  = -1;
+                        $distancia_temp_conselho = 9999999999; 
+                        foreach($conselhos as $conselho){
+                            $dist = medir_distancia::distancia($conselho->conselhos->lat , $conselho->conselhos->lat, $ponto->lat , $ponto->lon); //Verifico dentro desses pontos existentes se o local recebido está próximo
+                            if($dist < $distancia_temp_conselho)
+                            {
+                                $id_conselho_escolhido = $conselho->id;
+                                $distancia_temp_conselho = $dist;
+                            }
+                        }                        
+                        if($id_conselho_escolhido != -1)
+                        {
+                            //Envia email para o conselho X
+                            //Envia mensagem no telegram
+                            $mensagem = "Muitas denuncias estão sendo feitas no ponto nº : $ponto->id %0AFoi verificado que o conselho tutelar {$conselho->conselhos->nome} é o mais próximo desse ponto. %0AAs coordenadas desse ponto são:%0ALat: $ponto->lat %0ALon:$ponto->lon. %0AO Endereço do conselho é : {$conselho->conselhos->endereco}";
+                             $req = file_get_contents("https://api.telegram.org/bot2032416402:AAF2aKJ1uCvgfq8yHSJQ_0i8T2k8UUqqAug/sendMessage?chat_id=-790989297&text=$mensagem");
+                            
+                        }
                     }
                     else{
                         $ponto->var =  $ponto->var+1;
@@ -85,8 +107,8 @@ class api extends Controller
                     ]);
                 DB::commit();
         }
-
-        dd(pontos::get());
+        return "Denuncia feita com sucesso!";
+        //dd(pontos::get());
         //return (""$lat  $lon"");
         //return  medir_distancia::distancia(-23.483799381412894, -46.54102231241273,-23.47298679215245, -46.53109207139506);
     }
