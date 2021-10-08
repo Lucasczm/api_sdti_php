@@ -14,10 +14,11 @@ class configSeed extends Seeder
      */
     public function run()
     {
+
+        
         app_config::create([
             "raio_espaco" => 2,
             "trigger_denuncias" => 10,
-
         ]);
     }
 }
