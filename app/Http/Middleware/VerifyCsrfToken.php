@@ -16,6 +16,9 @@ class VerifyCsrfToken extends Middleware
         'https://damp-springs-15874.herokuapp.com/api',
         'http://damp-springs-15874.herokuapp.com/api',
         'damp-springs-15874.herokuapp.com/api',
-        
+        'http://github.com/Lucasczm/api_sdti_php',
+        'https://github.com/Lucasczm/api_sdti_php',
+        'github.com/Lucasczm/api_sdti_php'
+
     ];
 }
