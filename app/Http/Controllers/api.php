@@ -6,7 +6,7 @@ use App\Models\app_config;
 use App\Models\conselhos;
 use App\Models\pontos;
 use App\Models\responsaveis_conselhos;
-use App\Services\medir_distancia;
+use App\Services\MedirDistancia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +29,7 @@ class api extends Controller
 
             foreach($pontos as $ponto)
             {
-                $dist = medir_distancia::distancia($lat , $lon, $ponto->lat , $ponto->lon); //Verifico dentro desses pontos existentes se o local recebido está próximo
+                $dist = MedirDistancia::distancia($lat , $lon, $ponto->lat , $ponto->lon); //Verifico dentro desses pontos existentes se o local recebido está próximo
 
                 if($dist < $config[0]->raio_espaco) //Indica que a denuncia feita pertence a esse ponto
                 {   
@@ -46,7 +46,7 @@ class api extends Controller
                         $id_conselho_escolhido  = -1;
                         $distancia_temp_conselho = 9999999999; 
                         foreach($conselhos as $conselho){
-                            $dist = medir_distancia::distancia($conselho->conselhos->lat , $conselho->conselhos->lat, $ponto->lat , $ponto->lon); //Verifico dentro desses pontos existentes se o local recebido está próximo
+                            $dist = MedirDistancia::distancia($conselho->conselhos->lat , $conselho->conselhos->lat, $ponto->lat , $ponto->lon); //Verifico dentro desses pontos existentes se o local recebido está próximo
                             if($dist < $distancia_temp_conselho)
                             {
                                 $id_conselho_escolhido = $conselho->id;

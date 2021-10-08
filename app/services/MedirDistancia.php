@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class  medir_distancia{
+class  MedirDistancia{
 
     static function distancia($lat1, $lon1, $lat2, $lon2)
     {
