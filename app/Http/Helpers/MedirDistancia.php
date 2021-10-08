@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Helpers;
 
-class  MedirDistancia{
+class  MedirDistancia
+{
 
     static function distancia($lat1, $lon1, $lat2, $lon2)
     {
@@ -15,5 +16,4 @@ class  MedirDistancia{
         $dist = number_format($dist, 3, '.', '');
         return $dist;
     }
-
 }
